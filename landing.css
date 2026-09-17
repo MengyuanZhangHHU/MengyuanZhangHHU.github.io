@@ -43,17 +43,7 @@ h1 span{display:block;margin-top:5px;font-size:17px;font-weight:400;color:#6d748
   font-weight:700;
   background:#fff;
 }
-.option:hover{
-  border-color:#9aa9ba;
-  background:#f8fafc;
-}
-.back{
-  display:inline-block;
-  margin-top:18px;
-  color:#52606d;
-  font-size:13px;
-  text-decoration:none;
-}
+.option:hover{border-color:#9aa9ba;background:#f8fafc}
 @media(max-width:560px){
   .card{padding:24px}
   .options{grid-template-columns:1fr}

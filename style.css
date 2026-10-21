@@ -1,4 +1,4 @@
-/* 个人学术主页 V4.2（内容详情结构调整）
+/* 个人学术主页 V4.4（统一正文黑色与重点蓝色）
    桌面正文模块比 V3 增大 1px，手机端保持 V3 字号；教育背景使用五列布局。 */
 :root {
   --black: #000;
@@ -56,7 +56,7 @@ a { color: var(--blue); }
 .brand-name { font-size: var(--fs-nav); font-weight: 700; }
 .topbar nav { display: flex; justify-content: flex-end; align-items: center; min-width: 0; white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
 .topbar nav::-webkit-scrollbar { display: none; }
-.topbar nav a { position: relative; padding: 4px 13px; color: var(--blue-dark); font-size: var(--fs-nav); font-weight: 700; text-decoration: none; }
+.topbar nav a { position: relative; padding: 4px 13px; color: var(--blue); font-size: var(--fs-nav); font-weight: 700; text-decoration: none; }
 .topbar nav a + a::before { position: absolute; content: ""; left: 0; top: 25%; width: 1px; height: 50%; background: var(--blue); }
 .topbar nav a:hover, .topbar nav a:focus-visible { text-decoration: underline; text-underline-offset: 4px; color: var(--blue); }
 
@@ -67,10 +67,11 @@ a { color: var(--blue); }
 .hero p { margin: 0; font-size: var(--fs-hero); }
 .hero-role { font-weight: 500; }
 .hero-sep { color: var(--blue); padding: 0 2px; }
-.hero-direction { margin-top: 10px !important; color: var(--blue-dark); }
-.hero-direction strong { font-weight: 700; }
+.hero-direction { margin-top: 10px !important; color: var(--black); }
+.hero-direction strong { font-weight: 700; color: var(--blue); }
 .avatar { width: 142px; height: 142px; object-fit: cover; object-position: center top; border: 2px solid var(--blue); border-radius: 50%; justify-self: end; background: #fff; }
 
+/* 配色规则：普通信息（含所有日期与年份）黑色；链接、重点编号、研究状态和详情控件蓝色。 */
 /* 章节标题和所有三列条目 */
 .section { padding-top: 28px; scroll-margin-top: 75px; }
 .section-header { display: flex; align-items: end; justify-content: space-between; gap: 14px; }
@@ -79,11 +80,11 @@ a { color: var(--blue); }
 .row-entry, .publication, .working-entry { padding: 13px 2px 12px; border-bottom: 1px solid var(--blue); }
 .row-main { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1.2fr) 130px; gap: 16px; align-items: start; }
 .row-left { min-width: 0; font-size: var(--fs-primary); font-weight: 700; line-height: 1.55; }
-.row-middle { min-width: 0; color: var(--blue-dark); font-size: var(--fs-secondary); font-weight: 700; text-align: center; line-height: 1.6; }
-.row-main time, .publication-line1 time { font-size: var(--fs-date); font-weight: 700; color: var(--blue); text-align: right; white-space: nowrap; }
+.row-middle { min-width: 0; color: var(--black); font-size: var(--fs-secondary); font-weight: 700; text-align: center; line-height: 1.6; }
+.row-main time, .publication-line1 time { font-size: var(--fs-date); font-weight: 700; color: var(--black); text-align: right; white-space: nowrap; }
 /* 项目中“参与”是角色，不是日期；保留其原有布局但使用次要信息字号。 */
 #projects .row-main time { font-size: var(--fs-secondary); }
-.row-subtitle { margin-top: 6px; color: #343434; font-size: var(--fs-secondary); line-height: 1.7; }
+.row-subtitle { margin-top: 6px; color: var(--black); font-size: var(--fs-secondary); line-height: 1.7; }
 
 /* 折叠详情 */
 .detail { margin-top: 7px; }
@@ -103,7 +104,7 @@ a { color: var(--blue); }
 .detail-num { white-space: nowrap; }
 
 /* 教育背景由原三列改为五列：学位 / 学校 / 学院 / 专业 / 日期 */
-/* 按参考截图横向对齐五列：学位(黑/左) | 学校(蓝/中) | 学院(蓝/中) | 专业(蓝/左) | 日期(蓝/右)。
+/* 按参考截图横向对齐五列：学位(黑/左) | 学校(黑/中) | 学院(黑/中) | 专业(黑/左) | 日期(黑/右)。
    第一列和最后一列始终贴齐容器左右两端；详情位于整行下方。 */
 #education .education-grid {
   display: grid;
@@ -112,9 +113,9 @@ a { color: var(--blue); }
 }
 #education .edu-degree, #education .edu-major { min-width: 0; text-align: left; font-size: var(--fs-primary); font-weight: 700; line-height: 1.6; }
 #education .edu-degree { color: var(--black); }
-#education .edu-major { color: var(--blue-dark); }
-#education .edu-school, #education .edu-college { min-width: 0; text-align: center; font-size: var(--fs-secondary); font-weight: 700; line-height: 1.6; color: var(--blue-dark); }
-#education .edu-date { min-width: 0; text-align: right; font-size: var(--fs-date); font-weight: 700; color: var(--blue); line-height: 1.6; white-space: nowrap; }
+#education .edu-major { color: var(--black); }
+#education .edu-school, #education .edu-college { min-width: 0; text-align: center; font-size: var(--fs-secondary); font-weight: 700; line-height: 1.6; color: var(--black); }
+#education .edu-date { min-width: 0; text-align: right; font-size: var(--fs-date); font-weight: 700; color: var(--black); line-height: 1.6; white-space: nowrap; }
 #education .education-entry > details.detail { margin-top: 12px; }
 #projects .row-main { grid-template-columns: minmax(0,61fr) minmax(145px,24fr) minmax(70px,15fr); }
 #activities .row-main, #competitions .row-main { grid-template-columns: minmax(0,72fr) minmax(90px,15fr) minmax(92px,13fr); }
@@ -130,9 +131,9 @@ a { color: var(--blue); }
 .publication-line1 { display: grid; grid-template-columns: minmax(0,1fr) 64px; gap: 16px; align-items: start; }
 .publication-citation { min-width: 0; font-size: var(--fs-primary); font-weight: 700; line-height: 1.63; }
 .pub-number { color: var(--blue); white-space: nowrap; }
-.author-note { color: var(--blue-dark); font-size: var(--fs-secondary); }
-.publication-meta { color: var(--blue-dark); font-size: var(--fs-secondary); font-weight: 700; margin-top: 5px; }
-.meta-divider { padding: 0 3px; color: var(--blue); }
+.author-note { color: var(--black); font-size: var(--fs-secondary); }
+.publication-meta { color: var(--black); font-size: var(--fs-secondary); font-weight: 700; margin-top: 5px; }
+.meta-divider { padding: 0 3px; color: var(--black); }
 /* 论文首行只包含文献标题和年份；期刊信息与真实访问链接固定在第二行。 */
 .publication-second-line { display: grid; grid-template-columns: minmax(0,1fr) max-content; gap: 12px; align-items: start; margin-top: 5px; }
 .publication-second-line .publication-meta { margin-top: 0; min-width: 0; overflow-wrap: anywhere; }
@@ -142,11 +143,11 @@ a { color: var(--blue); }
 .publication-actions .detail summary { line-height: 24px; }
 .text-link, .no-link { font-size: var(--fs-control); }
 .text-link { font-weight: 700; text-underline-offset: 3px; }
-.no-link { color: #6b7280; }
+.no-link { color: var(--black); }
 .working-heading { display: grid; grid-template-columns: minmax(0,1fr) max-content; align-items: start; gap: 16px; }
 .working-title { min-width: 0; overflow-wrap: anywhere; font-size: var(--fs-primary); font-weight: 700; line-height: 1.65; }
 .working-status { max-width: 128px; font-size: var(--fs-secondary); font-weight: 700; color: var(--blue-dark); text-align: right; white-space: normal; line-height: 1.65; }
-.working-authors { margin-top: 2px; font-size: var(--fs-secondary); color: var(--blue-dark); }
+.working-authors { margin-top: 2px; font-size: var(--fs-secondary); color: var(--black); }
 .detail-text { margin: 0; line-height: 1.78; }
 
 /* 如未来增设作品集，沿用同一字号令牌；当前内容与栏目不新增或删除。 */
@@ -154,8 +155,8 @@ a { color: var(--blue); }
 .portfolio-description, .portfolio-poster-name, .portfolio-caption { font-size: var(--fs-portfolio-caption); }
 .portfolio a, .portfolio button { font-size: var(--fs-control); }
 
-footer { display: flex; justify-content: center; gap: 9px; align-items: center; padding-top: 38px; color: var(--blue-dark); font-size: var(--fs-footer); }
-.footer-sep { color: var(--blue); }
+footer { display: flex; justify-content: center; gap: 9px; align-items: center; padding-top: 38px; color: var(--black); font-size: var(--fs-footer); }
+.footer-sep { color: var(--black); }
 
 /* 密码页和页面辅助控件：继承 V3 原有字号与布局 */
 .secure-gate { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(ellipse 72% 70% at 50% 45%,#eef5fe 0%,#f8fbff 54%,#fff 100%); font-family: "Times New Roman","Songti SC","STSong","SimSun",serif; }

@@ -1,6 +1,5 @@
-/* 张萌媛 · 个人学术主页 V3.1（仅桌面字号调整）
-   模块内部桌面字号在 V3 基础上增大 1px；<=700px 手机端保持 V3 原样。
-   页面头部、导航、密码组件、页脚与所有内容/功能不变。 */
+/* 个人学术主页 V4（整合修改）
+   桌面正文模块比 V3 增大 1px，手机端保持 V3 字号；教育背景使用五列布局。 */
 :root {
   --black: #000;
   --blue: #0b4fa2;
@@ -103,8 +102,15 @@ a { color: var(--blue); }
 .detail-list li { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 6px; margin: 5px 0; line-height: 1.78; }
 .detail-num { white-space: nowrap; }
 
-/* 版式列宽：不更改 V2 的栏位与顺序 */
-#education .row-main { grid-template-columns: minmax(155px,20fr) minmax(0,66fr) minmax(112px,14fr); }
+/* 教育背景由原三列改为五列：学位 / 学校 / 学院 / 专业 / 日期 */
+#education .education-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.7fr) minmax(0, 1.4fr) minmax(0, 1fr) minmax(118px, 1.12fr);
+  gap: 12px; align-items: start;
+}
+#education .edu-degree, #education .edu-major { min-width: 0; text-align: left; font-size: var(--fs-primary); font-weight: 700; line-height: 1.6; }
+#education .edu-school, #education .edu-college { min-width: 0; text-align: center; font-size: var(--fs-secondary); font-weight: 700; line-height: 1.6; color: var(--blue-dark); }
+#education .edu-date { min-width: 0; text-align: right; font-size: var(--fs-date); font-weight: 700; color: var(--blue); line-height: 1.6; white-space: nowrap; }
 #projects .row-main { grid-template-columns: minmax(0,61fr) minmax(145px,24fr) minmax(70px,15fr); }
 #activities .row-main, #competitions .row-main { grid-template-columns: minmax(0,72fr) minmax(90px,15fr) minmax(92px,13fr); }
 #internships .row-main { grid-template-columns: minmax(155px,25fr) minmax(0,54fr) minmax(132px,21fr); }
@@ -118,14 +124,20 @@ a { color: var(--blue); }
 .author-note { color: var(--blue-dark); font-size: var(--fs-secondary); }
 .publication-meta { color: var(--blue-dark); font-size: var(--fs-secondary); font-weight: 700; margin-top: 5px; }
 .meta-divider { padding: 0 3px; color: var(--blue); }
+.publication-second-line { display: flex; justify-content: space-between; gap: 12px 20px; align-items: baseline; flex-wrap: wrap; margin-top: 5px; }
+.publication-second-line .publication-meta { margin-top: 0; flex: 1 1 290px; }
+.publication-second-line .publication-link { flex: 0 0 auto; white-space: nowrap; }
 .publication-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 7px; line-height: 1; }
 .publication-actions .detail { margin: 0; }
 .publication-actions .detail summary { line-height: 24px; }
 .text-link, .no-link { font-size: var(--fs-control); }
 .text-link { font-weight: 700; text-underline-offset: 3px; }
 .no-link { color: #6b7280; }
-.working-title { font-size: var(--fs-primary); font-weight: 700; line-height: 1.65; }
-.working-status { font-size: var(--fs-secondary); font-weight: 700; color: var(--blue-dark); margin-top: 3px; }
+.working-heading { display: grid; grid-template-columns: minmax(0,1fr) max-content; align-items: start; gap: 16px; }
+.working-title { min-width: 0; overflow-wrap: anywhere; font-size: var(--fs-primary); font-weight: 700; line-height: 1.65; }
+.working-status { max-width: 128px; font-size: var(--fs-secondary); font-weight: 700; color: var(--blue-dark); text-align: right; white-space: normal; line-height: 1.65; }
+.working-authors { margin-top: 2px; font-size: var(--fs-secondary); color: var(--blue-dark); }
+.detail-text { margin: 0; line-height: 1.78; }
 
 /* 如未来增设作品集，沿用同一字号令牌；当前内容与栏目不新增或删除。 */
 .portfolio-subtitle, .portfolio-subheading { font-size: var(--fs-subsection); }
@@ -175,7 +187,11 @@ footer { display: flex; justify-content: center; gap: 9px; align-items: center; 
   .topbar nav { width: 100%; justify-content: flex-start; }
   .topbar nav a { padding: 3px 11px; }
   .section { scroll-margin-top: 100px; }
-  .row-main, #education .row-main, #projects .row-main, #activities .row-main, #competitions .row-main, #internships .row-main, #skills .row-main { grid-template-columns: minmax(0,1fr); gap: 1px; }
+  .row-main, #projects .row-main, #activities .row-main, #competitions .row-main, #internships .row-main, #skills .row-main { grid-template-columns: minmax(0,1fr); gap: 1px; }
+  /* 窄屏五项按学位/学校/学院/专业/日期排列，避免强行压缩 */
+  #education .education-grid { grid-template-columns: minmax(0,1fr); gap: 1px; }
+  #education .edu-school, #education .edu-college { text-align: center; }
+  #education .edu-date { text-align: right; margin-top: 1px; }
   .row-middle, .row-main time { text-align: left; }
 }
 @media (max-width: 700px) {
@@ -202,6 +218,8 @@ footer { display: flex; justify-content: center; gap: 9px; align-items: center; 
   .hero h1 { margin-bottom: 8px; }
   .hero p { line-height: 1.72; }
   .section { padding-top: 24px; }
+  .working-heading { gap: 9px; }
+  .working-status { max-width: 95px; }
   .publication-line1 { grid-template-columns: 1fr; gap: 2px; }
   .publication-line1 time { text-align: left; }
 }

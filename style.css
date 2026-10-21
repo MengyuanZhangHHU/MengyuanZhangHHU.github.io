@@ -1,4 +1,4 @@
-/* 个人学术主页 V4.1（教育五列对齐及论文链接第二行）
+/* 个人学术主页 V4.2（内容详情结构调整）
    桌面正文模块比 V3 增大 1px，手机端保持 V3 字号；教育背景使用五列布局。 */
 :root {
   --black: #000;
@@ -121,6 +121,10 @@ a { color: var(--blue); }
 #internships .row-main { grid-template-columns: minmax(155px,25fr) minmax(0,54fr) minmax(132px,21fr); }
 #skills .row-main { grid-template-columns: minmax(155px,25fr) minmax(0,75fr) 0; gap: 12px; }
 #skills .row-main time { display: none; }
+/* 科研技能右侧工具列表与容器右边缘对齐，移动端亦保持右对齐。 */
+#skills .row-middle { text-align: right; }
+/* 竞赛赛题移入详情，和具体研究任务之间保留小间距。 */
+#competitions .competition-topic { margin: 0 0 7px; }
 
 /* 已发表和工作论文 */
 .publication-line1 { display: grid; grid-template-columns: minmax(0,1fr) 64px; gap: 16px; align-items: start; }

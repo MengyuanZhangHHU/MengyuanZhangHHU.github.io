@@ -240,3 +240,131 @@ footer { display: flex; justify-content: center; gap: 9px; align-items: center; 
   .avatar { width: 90px; height: 90px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+/* V4.5：仅手机端：名称+日期同一首行、信息压缩为两至三行。
+   在最后定义，覆盖旧版 max-width:820px 的单列强制堆叠。
+   桌面及平板（宽度 > 700px）的原布局完全保留。 */
+@media (max-width: 700px) {
+  .page { width: calc(100% - 24px); }
+  .row-entry, .publication, .working-entry { padding-top: 10px; padding-bottom: 10px; }
+
+  /* 普通经历：名称始终在日期左侧，日期固定于右上角。
+     第二行显示学校/获奖等级/项目类型，文本过长时允许在自身列内换行。 */
+  .row-main,
+  #projects .row-main,
+  #activities .row-main,
+  #competitions .row-main,
+  #internships .row-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 1px;
+    align-items: start;
+  }
+  .row-main .row-left {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.52;
+    overflow-wrap: anywhere;
+  }
+  .row-main > time {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.52;
+    white-space: nowrap;
+  }
+  .row-main .row-middle {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+    max-width: 135px;
+    justify-self: end;
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.46;
+    overflow-wrap: anywhere;
+  }
+  /* 实习：职位与日期首行；单位保留完整文字，下一行左对齐。 */
+  #internships .row-main .row-left { grid-row: 1; }
+  #internships .row-main .row-middle {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+    font-size: 11px;
+  }
+  /* 科研项目：项目名配右上角“参与”，基金类型放第二行。 */
+  #projects .row-main .row-left { grid-row: 1; }
+  #projects .row-main > time { font-size: 11px; }
+  #projects .row-main .row-middle { grid-column: 1 / -1; grid-row: 2; max-width: none; justify-self: start; text-align: left; }
+
+  /* 教育背景：学位 / 日期同一行，其余信息压缩成两行。
+     五项字段保持顺序和完整显示，不以省略号丢失数据。 */
+  #education .education-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) max-content;
+    grid-template-rows: auto auto auto;
+    column-gap: 9px;
+    row-gap: 1px;
+    align-items: baseline;
+  }
+  #education .edu-degree { grid-column:1; grid-row:1; font-size:12px; text-align:left; }
+  #education .edu-date { grid-column:2; grid-row:1; font-size:11px; text-align:right; margin-top:0; white-space:nowrap; }
+  #education .edu-school { grid-column:1; grid-row:2; font-size:11px; text-align:left; }
+  #education .edu-college { grid-column:2; grid-row:2; font-size:11px; text-align:right; }
+  #education .edu-major { grid-column:1 / -1; grid-row:3; font-size:11px; text-align:left; }
+  #education .education-entry > details.detail { margin-top:6px; }
+
+  /* 科研技能：名称与右侧标签同一行，不再堆叠。 */
+  #skills .row-main {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) max-content;
+    grid-template-rows:auto;
+    align-items:baseline;
+    column-gap:8px;
+  }
+  #skills .row-main .row-left { grid-column:1; grid-row:1; font-size:12px; }
+  #skills .row-main .row-middle {
+    grid-column:2;
+    grid-row:1;
+    max-width:min(58vw, 215px);
+    justify-self:end;
+    text-align:right;
+    font-size:11px;
+    overflow-wrap:normal;
+  }
+
+  /* 学术论文：原本拆行的发表年份移回题名右上角。 */
+  .publication-line1 {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) max-content;
+    align-items:start;
+    gap:8px;
+  }
+  .publication-citation, .working-title { font-size:12px; line-height:1.55; }
+  .publication-line1 time { text-align:right; font-size:11px; line-height:1.55; white-space:nowrap; }
+  .publication-meta, .publication-second-line .publication-meta { font-size:11px; line-height:1.58; }
+  .publication-second-line { gap:8px; }
+  .publication-second-line .publication-link { align-self:start; }
+  .working-heading { grid-template-columns:minmax(0,1fr) max-content; gap:8px; }
+  .working-status { max-width:99px; font-size:11px; line-height:1.55; }
+  .detail-panel { font-size:var(--fs-detail); }
+}
+
+/* 窄手机进一步压紧间距，维持第一行左右对齐与完整文字。 */
+@media (max-width: 360px) {
+  .row-main, #projects .row-main, #activities .row-main, #competitions .row-main,
+  #internships .row-main, #education .education-grid { column-gap:5px; }
+  #education .edu-degree, .row-main .row-left { font-size:11px; }
+  #skills .row-main .row-left { font-size:11px; }
+  .publication-citation, .working-title { font-size:11px; }
+  .working-status { max-width:88px; }
+}
